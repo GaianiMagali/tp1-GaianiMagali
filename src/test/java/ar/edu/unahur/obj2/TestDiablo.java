@@ -13,7 +13,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static ar.edu.unahur.obj2.Tecnica.cruzRoja;
 import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertTrue;
 
 
 public class TestDiablo {
@@ -66,8 +68,9 @@ public class TestDiablo {
 
     @Test
     public void testEntrenarAlma() {
-        assertEquals(diablo.entrenar(Tecnica.cruzRoja,alma1),alma1);
-        assertEquals(diablo.entrenar(Tecnica.luchaMarcial,alma2),alma2);
+        Alma almaEntrenada = diablo.entrenar(cruzRoja,alma1);
+        assertEquals(almaEntrenada.getNivelBondad(),100);
+        assertEquals(diablo.entrenar(Tecnica.luchaMarcial,alma2).getNivelValor(),80);
     }
 
     //Parte 3
@@ -75,7 +78,6 @@ public class TestDiablo {
     @Test
     public void testAlmasCazadas() {
         List<Alma> almasRecolectadas= Stream.of(alma1,alma3,alma2,alma4,alma5,alma6).collect(Collectors.toList());
-
         assertEquals(diablo.almas(),almasRecolectadas);
     }
 

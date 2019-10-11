@@ -10,7 +10,7 @@ public class CruzRoja extends Entrenamiento {
 
     @Override
     public int getNivelBondad() {
-        return 100;
+        return Math.max(super.getNivelBondad(),100);
     }
 
     @Override

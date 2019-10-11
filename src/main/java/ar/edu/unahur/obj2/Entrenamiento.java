@@ -8,6 +8,7 @@ public abstract class Entrenamiento extends Alma{
         this.alma = alma;
     }
 
+
     @Override
     public int getNivelValor() {
         return alma.getNivelValor() ;

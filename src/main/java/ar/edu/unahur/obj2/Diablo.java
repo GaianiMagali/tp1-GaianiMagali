@@ -16,13 +16,14 @@ public class Diablo{
     public Alma entrenar(Tecnica tecnica, Alma alma) {
         switch (tecnica){
             case luchaMarcial:
-                new LuchaMarcial(alma);
+                return new LuchaMarcial(alma);
                 case cruzRoja:
-                    new CruzRoja(alma);
+                   return new CruzRoja(alma);
             case supervivenciaExtrema:
-                 new SupervivenciaExtrema(alma);
+                 return new SupervivenciaExtrema(alma);
+            default: return null;
         }
-        return alma;
+
     }
 
     public List<Alma> almas() {

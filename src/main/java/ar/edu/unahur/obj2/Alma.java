@@ -1,5 +1,7 @@
 package ar.edu.unahur.obj2;
 
+import java.util.Objects;
+
 public class Alma{
     private int nivelBondad;
     private int nivelValor;
@@ -41,6 +43,7 @@ public class Alma{
     public void reducirValor(int valor){
         this.nivelValor = valor;
     }
+
 
     @Override
     public String toString() {
