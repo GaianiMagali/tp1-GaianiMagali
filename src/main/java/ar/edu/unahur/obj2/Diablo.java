@@ -21,8 +21,9 @@ public class Diablo{
                    return new CruzRoja(alma);
             case supervivenciaExtrema:
                  return new SupervivenciaExtrema(alma);
-            default: return null;
+
         }
+        return alma;
 
     }
 

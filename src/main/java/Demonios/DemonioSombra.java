@@ -3,7 +3,6 @@ package Demonios;
 import ar.edu.unahur.obj2.Alma;
 
 public class DemonioSombra extends Demonio {
-    private Alma alma;
 
     public DemonioSombra(int nivelMaldad) {
         super(nivelMaldad);
@@ -19,11 +18,4 @@ public class DemonioSombra extends Demonio {
         alma.reducirValor(alma.getNivelValor() / 2);
     }
 
-
-    @Override
-    public String toString() {
-        return "DemonioSombra{" +
-                "alma=" + alma +
-                '}';
-    }
 }

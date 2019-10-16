@@ -4,10 +4,15 @@ public class SupervivenciaExtrema extends Entrenamiento {
 
     public SupervivenciaExtrema(Alma alma) {
         super(alma);
+        getAlma().setFriolenta(false);
     }
 
     @Override
-    public boolean isFriolenta() {
-        return false;
+    public void setFriolenta(boolean friolenta) {
+        getAlma().setFriolenta(false);
     }
+
+
+
+
 }

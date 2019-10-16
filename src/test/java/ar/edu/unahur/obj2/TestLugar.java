@@ -1,5 +1,8 @@
 package ar.edu.unahur.obj2;
 
+import ar.edu.unahur.obj2.diabolico.alma.proteccion.AnilloDePoder;
+import ar.edu.unahur.obj2.diabolico.alma.proteccion.LuzBlanca;
+import ar.edu.unahur.obj2.diabolico.alma.proteccion.LuzNegra;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -20,14 +23,22 @@ public class TestLugar {
     Lugar lugar1;
     Lugar lugar2;
 
+    LuzBlanca luzBlanca;
+    LuzNegra luzNegra;
+    AnilloDePoder anilloDePoder;
+
     @BeforeMethod
     public void setUp() {
-        alma1 = new Alma(10,10,false);
-        alma2 = new Alma(40,40,true);
-        alma3 = new Alma(7,20,false);
-        alma4 = new Alma(20,10,true);
-        alma5 = new Alma(8,30,true);
-        alma6 = new Alma(6,10,true);
+        luzBlanca = new LuzBlanca();
+        luzNegra = new LuzNegra();
+        anilloDePoder = new AnilloDePoder();
+
+        alma1 = new Alma(10,10,false,luzBlanca);
+        alma2 = new Alma(40,40,true,luzNegra);
+        alma3 = new Alma(7,20,false,luzBlanca);
+        alma4 = new Alma(20,10,true,luzNegra);
+        alma5 = new Alma(8,30,true,anilloDePoder);
+        alma6 = new Alma(6,10,true,anilloDePoder);
 
         lugar1 = new Lugar("Espanto");
         lugar2 = new Lugar("Pantano");

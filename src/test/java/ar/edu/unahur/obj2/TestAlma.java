@@ -3,6 +3,9 @@ package ar.edu.unahur.obj2;
 import Demonios.DemonioFuego;
 import Demonios.DemonioHielo;
 import Demonios.DemonioSombra;
+import ar.edu.unahur.obj2.diabolico.alma.proteccion.AnilloDePoder;
+import ar.edu.unahur.obj2.diabolico.alma.proteccion.LuzBlanca;
+import ar.edu.unahur.obj2.diabolico.alma.proteccion.LuzNegra;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -12,6 +15,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertTrue;
 
 public class TestAlma {
     Alma alma1;
@@ -26,14 +30,22 @@ public class TestAlma {
     DemonioHielo demonioHielo;
     DemonioSombra demonioSombra;
 
+    LuzBlanca luzBlanca;
+    LuzNegra luzNegra;
+
+
 
     Lugar lugar1;
 
     @BeforeMethod
     public void setUp() {
-        alma1 = new Alma(10,10,false);
-        alma2 = new Alma(40,40,true);
-        alma3 = new Alma(20,10,true);
+        luzBlanca = new LuzBlanca();
+        luzNegra = new LuzNegra();
+
+
+        alma1 = new Alma(10,10,false, luzBlanca);
+        alma2 = new Alma(40,40,true,luzNegra);
+        alma3 = new Alma(20,10,true,luzNegra);
 
         cruzRoja = new CruzRoja(alma1);
         luchaMarcial = new LuchaMarcial(alma2);
@@ -44,6 +56,21 @@ public class TestAlma {
         demonioSombra = new DemonioSombra(80);
 
         lugar1 = new Lugar("Espanto");
+
+    }
+
+    @Test
+    public void almaEstaProtegida() {
+        lugar1.agregarAlmas(alma1);
+        demonioFuego.cazarAlmas(lugar1);
+
+        List<Alma> almascazadas= new ArrayList<>();
+        assertEquals(demonioFuego.getAlmasCazadas(),almascazadas);
+
+
+        alma1.setProteccion(luzNegra);
+        List<Alma> almascazadas1= new ArrayList<>();
+        assertEquals(demonioFuego.getAlmasCazadas(),almascazadas1);
 
     }
 
@@ -86,25 +113,21 @@ public class TestAlma {
 
     @Test
     public void testAlmaConMasDeUnaTecnica() {
-        cruzRoja = new CruzRoja(alma1);
-        luchaMarcial = new LuchaMarcial(alma1);
+        cruzRoja = new CruzRoja(alma2);
+        luchaMarcial = new LuchaMarcial(alma2);
 
         lugar1.agregarAlmas(luchaMarcial);
         lugar1.agregarAlmas(cruzRoja);
 
         demonioFuego.cazarAlmas(lugar1);
-        List<Alma> almasRecolectadas= Stream.of(luchaMarcial).collect(Collectors.toList());
-        assertEquals(demonioFuego.getAlmasCazadas(),almasRecolectadas);
+        List<Alma> almasRecolectadas1= new ArrayList<>();
+        //List<Alma> almasRecolectadas= Stream.of(luchaMarcial).collect(Collectors.toList());
+        assertEquals(demonioFuego.getAlmasCazadas(),almasRecolectadas1);
 
 
         demonioSombra.cazarAlmas(lugar1);
-        List<Alma> almasRecolectadas1= new ArrayList<>();
-        assertEquals(demonioSombra.getAlmasCazadas(),almasRecolectadas1);
-
-
-        demonioHielo.cazarAlmas(lugar1);
-        List<Alma> almasRecolectadas2=  new ArrayList<>();
-        assertEquals(demonioHielo.getAlmasCazadas(),almasRecolectadas2);
+        List<Alma> almasRecolectadas2= new ArrayList<>();
+        assertEquals(demonioSombra.getAlmasCazadas(),almasRecolectadas2);
 
     }
 }

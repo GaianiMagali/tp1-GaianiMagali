@@ -11,11 +11,14 @@ public abstract class Demonio {
     protected List<Alma> almasCazadas = new ArrayList<>();
     private List<Alma> almasAtormentadas = new ArrayList<>();
 
-
     public Demonio(int nivelMaldad) {
         this.nivelMaldad = nivelMaldad;
         this.almasCazadas = almasCazadas;
         this.almasAtormentadas = almasAtormentadas;
+    }
+
+    public boolean almaEstaprotegida(Alma alma){
+        return alma.estaProtegida(this);
     }
 
     public abstract boolean cazar(Alma alma);
@@ -51,6 +54,7 @@ public abstract class Demonio {
     public void atormentar(Alma alma){
        alma.serAtormentada(5);
        atormentarSegunDemonio(alma);
+       atormentarAlma(alma);
     }
 
     public int cantidadAlmasAtormentadas(){
@@ -63,19 +67,21 @@ public abstract class Demonio {
 
     public abstract void atormentarSegunDemonio(Alma alma);
 
+
+
     public void cazarAlmas(Lugar lugar){
         List<Alma> almaRecolectadas = new ArrayList();
         almaRecolectadas.addAll(lugar.getAlmas());
 
         almaRecolectadas.forEach(alma -> {
-        if (nivelDeMaldadParaCazar(alma) && cazar(alma)) {
+        if (nivelDeMaldadParaCazar(alma) && cazar(alma) && almaEstaprotegida(alma)) {
             cazarAlma(alma);
             lugar.remove(alma);
-        } else {
-            atormentar(alma);
-            atormentarAlma(alma);
-        }
-    });
+        } else
+                atormentar(alma);
+
+        });
+
         nivelMaldad += cantidadAlmasAtormentadas() + dobleDeAlmasCazadas();
     }
 
